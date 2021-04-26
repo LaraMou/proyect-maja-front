@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Etiqueta } from 'src/app/models/etiqueta';
+import { EtiquetaService } from 'src/app/services/etiqueta.service';
 
 @Component({
   selector: 'app-etiquetas-page',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./etiquetas-page.component.scss']
 })
 export class EtiquetasPageComponent implements OnInit {
-
-  constructor() { }
+  displayedColumns: string[] = ['nombre', 'creador', 'fecha_creacion'];
+  dataSource: Etiqueta[];
+  constructor(private etiquetaService: EtiquetaService) { }
 
   ngOnInit(): void {
+    this.etiquetaService.getEtiquetas().subscribe(dataSource => this.dataSource = dataSource)
+
   }
 
 }

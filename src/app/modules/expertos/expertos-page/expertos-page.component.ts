@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { Expertos } from 'src/app/models/expertos';
+import { ExpertoService } from 'src/app/services/experto.service';
+
 
 @Component({
   selector: 'app-expertos-page',
@@ -6,10 +10,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./expertos-page.component.scss']
 })
 export class ExpertosPageComponent implements OnInit {
+  // listExpertos: Expertos[] = [];
+  displayedColumns: string[] = ['id', 'nombre', 'estado', 'etiquetas','valoracion'];
+  dataSource: Expertos[];
 
-  constructor() { }
+
+constructor(private expertoService: ExpertoService){}
 
   ngOnInit(): void {
-  }
+
+    this.expertoService.getExpertos().subscribe( dataSource => this.dataSource = dataSource)
+
+   }
+
 
 }
